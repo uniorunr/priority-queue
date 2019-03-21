@@ -16,6 +16,8 @@ class MaxHeap {
 	pop() {
 		if (this.root) {
 			this.detachRoot();
+
+			return this.root.data;
 		}
 	}
 
@@ -32,7 +34,7 @@ class MaxHeap {
 	}
 
 	isEmpty() {
-		
+		return this.root === null;
 	}
 
 	clear() {
