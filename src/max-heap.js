@@ -64,15 +64,30 @@ class MaxHeap {
 	}
 
 	shiftNodeUp(node) {
-		let initialNode = node; 
-		let parentNode = initialNode.parent;
-		while (initialNode.parent) {
+		const initialNode = node; 
+		const parentNode = initialNode.parent;
+		
+		if (parentNode) {
 			if (initialNode.priority > parentNode.priority) {
+				if (this.parentNodes.includes(initialNode) &&
+				this.parentNodes.includes(parentNode)) {
+					[
+						this.parentNodes[this.parentNodes.indexOf(initialNode)],
+						this.parentNodes[this.parentNodes.indexOf(parentNode)]
+					] = [
+						this.parentNodes[this.parentNodes.indexOf(parentNode)],
+						this.parentNodes[this.parentNodes.indexOf(initialNode)]
+					]
+				} else if (!this.parentNodes.includes(parentNode) 
+				&& this.parentNodes.includes(initialNode)) {
+					this.parentNodes[this.parentNodes.indexOf(initialNode)] = parentNode;
+				}
+
 				initialNode.swapWithParent();
-			} else break;
-		}
-		if (!initialNode.parent) this.root = node; 
-	}
+				this.shiftNodeUp(initialNode);
+			}
+		} else this.root = initialNode;
+	} 
 
 	shiftNodeDown(node) {
 		
