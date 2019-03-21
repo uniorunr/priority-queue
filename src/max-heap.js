@@ -28,7 +28,7 @@ class MaxHeap {
 	}
 
 	size() {
-		
+		return this.parentNodes.length;
 	}
 
 	isEmpty() {
@@ -64,29 +64,19 @@ class MaxHeap {
 	}
 
 	shiftNodeUp(node) {
-		
+		let initialNode = node; 
+		let parentNode = initialNode.parent;
+		while (initialNode.parent) {
+			if (initialNode.priority > parentNode.priority) {
+				initialNode.swapWithParent();
+			} else break;
+		}
+		if (!initialNode.parent) this.root = node; 
 	}
 
 	shiftNodeDown(node) {
 		
 	}
 }
-
-let h;
-h = new MaxHeap();
-
-const nodes = [
-  new Node(0, 0),
-  new Node(1, 1),
-  new Node(2, 2),
-  new Node(3, 3),
-  new Node(4, 4),
-  new Node(5, 5),
-  new Node(6, 6),
-];
-
-nodes.forEach(node => {
-  h.insertNode(node);
-});
 
 module.exports = MaxHeap;
