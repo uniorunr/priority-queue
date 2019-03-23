@@ -15,14 +15,19 @@ class MaxHeap {
 
 	pop() {
 		if (this.root) {
-			this.detachRoot();
+			return this.detachRoot().data;
+		} else {
 
-			return this.root.data;
 		}
 	}
 
 	detachRoot() {
-		
+		const root = this.root;
+		const rootIndex = this.parentNodes.indexOf(root);
+
+		this.root = null;
+		this.parentNodes.splice(rootIndex, 1)[0];
+		return root;
 	}
 
 	restoreRootFromLastInsertedNode(detached) {
@@ -97,16 +102,5 @@ class MaxHeap {
 		
 	}
 }
-
-const h = new MaxHeap();
-h.push(42, 15);
-h.push(15, 14);
-h.push(0, 16);
-h.push(100, 100);
-
-const test = h.pop();
-const test1 = h.pop();
-const test2 = h.pop();
-const test3 = h.pop();
 
 module.exports = MaxHeap;
