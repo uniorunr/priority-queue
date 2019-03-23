@@ -68,6 +68,8 @@ class MaxHeap {
 	shiftNodeUp(node) {
 		const initialNode = node; 
 		const parentNode = initialNode.parent;
+
+		if (initialNode === parentNode) this.root = initialNode;
 		
 		if (parentNode) {
 			if (initialNode.priority > parentNode.priority) {
@@ -95,5 +97,16 @@ class MaxHeap {
 		
 	}
 }
+
+const h = new MaxHeap();
+h.push(42, 15);
+h.push(15, 14);
+h.push(0, 16);
+h.push(100, 100);
+
+const test = h.pop();
+const test1 = h.pop();
+const test2 = h.pop();
+const test3 = h.pop();
 
 module.exports = MaxHeap;
